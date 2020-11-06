@@ -43,7 +43,7 @@ def index():
 
 @app.route("/api/chkstudent", methods=['Post'])
 def chkStudent():
-    if not (request.json and request.json["Email"] and request.json["Password"]):
+    if not (request.json and request.json.get("Email") and request.json.get("Password")):
         return "Error"
     cur = mysql.connection.cursor()
     cur.execute("select * from students where Email='" + request.json["Email"] + "' and Password='" + request.json[
@@ -56,7 +56,7 @@ def chkStudent():
 
 @app.route("/api/students", methods=['Post'])
 def add_student():
-    if not (request.json and request.json["Email"] and request.json["Password"] and request.json.get("Cnic")):
+    if not (request.json and request.json.get("Email") and request.json.get("Password") and request.json.get("Cnic")):
         return "Error"
 
     cur = mysql.connection.cursor()
